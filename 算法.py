@@ -35,17 +35,17 @@ d=[]
 e=[]
 f=[]
 
-for i in range(len(marche)):
+'''for i in range(len(marche)):
     a=[marche[i]]
-    b.append(a)
+    b.append(a)'''
 for n in range(len(marche)):
-    #print(b[n])
+    a=[marche[n]]
+    b.append(a)
+    print(b[n])
     for i in range(len(marche)):
-        a=marche[i]
-        B=b[n]
-        #B=B.append(a)
-        c.append(B)
-        print(B)
+        A=marche[i]
+        c.append(b[n].extend(A))
+        print(c)
 '''for i3 in range(len(marche)):
     a=[marche[i]]
     e.append()
@@ -60,7 +60,7 @@ for i5 in range(len(marche)):
 print(c)
 print(len(c))
 
-#modifier
+
 
 
 
