@@ -24,10 +24,11 @@ nombre_article est une liste, l'élément de la liste est int, qui est le nombre
  vrai signifie à considérer, faux signifie à ne pas considérer, la valeur par défaut est true. 
  billet_prix est le prix du billet, la valeur par défaut est 1,9
 
- Ajoutez deux paramètres plus_cours et site, plus_cours indique s'il faut choisir l'itinéraire le plus court, 
+ Ajoutez trois paramètres plus_cours, site et mysite, plus_cours indique s'il faut choisir l'itinéraire le plus court, 
  false représente non, true représente oui et la valeur par défaut est false. 
  site est une liste, et les éléments de la liste sont des tuples. Le contenu des tuples sont les coordonnées x et y du magasin. 
  L'ordre d'arrangement des coordonnées du magasin doit être strictement conforme à l'ordre de la liste marche.
+ mysite est une liste, les éléments de la liste sont mes coordonnées x et mes coordonnées y, la valeur par défaut est [0,0]
  '''
 
 from collections import Counter
@@ -45,9 +46,9 @@ billet=True
 prix_billet=1.9
 site=[(1,4),(6,0),(7,3),(5,7),(3,6)]
 plus_cours=True
+mysite=[5,8]
 
-
-def main(marche,tous_articles,article,nombre_article,prix,site,seul_magasin=False,billet=True,prix_billet=1.9,plus_cours=False):
+def main(marche,tous_articles,article,nombre_article,prix,site,mysite=[0,0],seul_magasin=False,billet=True,prix_billet=1.9,plus_cours=False):
     tous_article_marche=[]
     for i in range(len(article)):
         for n in range(len(marche)):
@@ -248,7 +249,7 @@ def main(marche,tous_articles,article,nombre_article,prix,site,seul_magasin=Fals
     if plus_cours==True:
         value_sites=[]
         for i in site:
-            value_site=(list(i)[0]**2)+(list(i)[1]**2)
+            value_site=((list(i)[0]-mysite[0])**2) + ((list(i)[1]-mysite[1])**2)
             value_sites.append(value_site)
         print(value_sites)
         value_site_marche={value_sites:marche for value_sites,marche in zip(value_sites,marche)}
@@ -279,7 +280,7 @@ def main(marche,tous_articles,article,nombre_article,prix,site,seul_magasin=Fals
 
 if __name__ == '__main__':
     #main()
-    main(marche,tous_articles,article,nombre_article,prix,site,seul_magasin,billet,prix_billet,plus_cours)
+    main(marche,tous_articles,article,nombre_article,prix,site,mysite,seul_magasin,billet,prix_billet,plus_cours)
 
 
 
