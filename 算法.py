@@ -23,23 +23,31 @@ nombre_article est une liste, l'élément de la liste est int, qui est le nombre
  Ajoutez deux paramètres billette et billet_prix, billette indique s'il faut considérer le prix du billet, 
  vrai signifie à considérer, faux signifie à ne pas considérer, la valeur par défaut est true. 
  billet_prix est le prix du billet, la valeur par défaut est 1,9
+
+ Ajoutez deux paramètres plus_cours et site, plus_cours indique s'il faut choisir l'itinéraire le plus court, 
+ false représente non, true représente oui et la valeur par défaut est false. 
+ site est une liste, et les éléments de la liste sont des tuples. Le contenu des tuples sont les coordonnées x et y du magasin. 
+ L'ordre d'arrangement des coordonnées du magasin doit être strictement conforme à l'ordre de la liste marche.
  '''
 
 from collections import Counter
 import random
 
-marche=['auchan','lidl','franprix']
+marche=['auchan','lidl','franprix','carrefour','casino']
 tous_articles=['pomme','lait','sel','riz','tomate']
 article=['pomme','lait','sel']
 nombre_article=[1,2,3]
-prix=[1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0,11.0,12.0,13.0,14.0,15.0]
-'''random.shuffle(prix)
-random.shuffle(nombre_article)'''
+prix=[1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0,11.0,12.0,13.0,14.0,15.0,1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0]
+random.shuffle(prix)
+random.shuffle(nombre_article)
 seul_magasin=False
 billet=True
 prix_billet=1.9
+site=[(1,4),(6,0),(7,3),(5,7),(3,6)]
+plus_cours=True
 
-def main(marche,tous_articles,article,nombre_article,prix,seul_magasin=False,billet=True,prix_billet=1.9):
+
+def main(marche,tous_articles,article,nombre_article,prix,site,seul_magasin=False,billet=True,prix_billet=1.9,plus_cours=False):
     tous_article_marche=[]
     for i in range(len(article)):
         for n in range(len(marche)):
@@ -49,7 +57,7 @@ def main(marche,tous_articles,article,nombre_article,prix,seul_magasin=False,bil
     article_marche_prix={article_marche:prix for article_marche,prix in zip(tous_article_marche,prix)}
     #print(article_marche_prix)
 
-
+    marche_site={marche:site for marche,site in zip(marche,site)}
 
 
 
@@ -205,7 +213,7 @@ def main(marche,tous_articles,article,nombre_article,prix,seul_magasin=False,bil
 
 
     tousprixs={}                    
-    if seul_magasin==False:                   
+    if seul_magasin==False and plus_cours==False:                   
         for i in posibles:
             n=0
             prixs=0
@@ -222,7 +230,7 @@ def main(marche,tous_articles,article,nombre_article,prix,seul_magasin=False,bil
         #print(tousprixs)
         
 
-    if seul_magasin==True:
+    if seul_magasin==True and plus_cours==False:
         for i in marche:
             n=0
             prixs=0
@@ -236,6 +244,34 @@ def main(marche,tous_articles,article,nombre_article,prix,seul_magasin=False,bil
                     tousprixs[i] = prixs+prix_billet*2
         min_prixs = min(zip(tousprixs.values(),tousprixs.keys()))
 
+
+    if plus_cours==True:
+        value_sites=[]
+        for i in site:
+            value_site=(list(i)[0]**2)+(list(i)[1]**2)
+            value_sites.append(value_site)
+        print(value_sites)
+        value_site_marche={value_sites:marche for value_sites,marche in zip(value_sites,marche)}
+        min_value_site=min(value_site_marche)
+        n=0
+        prixs=0
+        while n<len(article) :
+            prixs=prixs+article_marche_prix.get((article[n],value_site_marche[min_value_site]))*nombre_article[n]
+            n+=1
+        if n==len(article):
+            min_prixs=prixs+prix_billet*2,value_site_marche[min_value_site]
+
+
+        
+
+
+
+
+
+
+
+
+
     print(min_prixs)
     return min_prixs
 
@@ -243,7 +279,7 @@ def main(marche,tous_articles,article,nombre_article,prix,seul_magasin=False,bil
 
 if __name__ == '__main__':
     #main()
-    main(marche,tous_articles,article,nombre_article,prix,seul_magasin,billet,prix_billet)
+    main(marche,tous_articles,article,nombre_article,prix,site,seul_magasin,billet,prix_billet,plus_cours)
 
 
 
