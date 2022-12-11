@@ -19,17 +19,27 @@ par exemple dans Dans les résultats de l'exécution des données de test, (12, 
  false signifie que vous pouvez faire vos achats dans plusieurs magasins et la valeur par défaut du paramètre est false.
 nombre_article est une liste, l'élément de la liste est int, qui est le nombre d'articles,
  dans l'ordre des articles dans la liste article.
+
+ Ajoutez deux paramètres billette et billet_prix, billette indique s'il faut considérer le prix du billet, 
+ vrai signifie à considérer, faux signifie à ne pas considérer, la valeur par défaut est true. 
+ billet_prix est le prix du billet, la valeur par défaut est 1,9
  '''
+
+from collections import Counter
+import random
 
 marche=['auchan','lidl','franprix']
 tous_articles=['pomme','lait','sel','riz','tomate']
 article=['pomme','lait','sel']
 nombre_article=[1,2,3]
 prix=[1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0,11.0,12.0,13.0,14.0,15.0]
+'''random.shuffle(prix)
+random.shuffle(nombre_article)'''
 seul_magasin=False
+billet=True
+prix_billet=1.9
 
-
-def main(marche,tous_articles,article,nombre_article,prix,seul_magasin=False):
+def main(marche,tous_articles,article,nombre_article,prix,seul_magasin=False,billet=True,prix_billet=1.9):
     tous_article_marche=[]
     for i in range(len(article)):
         for n in range(len(marche)):
@@ -195,7 +205,7 @@ def main(marche,tous_articles,article,nombre_article,prix,seul_magasin=False):
 
 
     tousprixs={}                    
-    if seul_magasin==False:                    
+    if seul_magasin==False:                   
         for i in posibles:
             n=0
             prixs=0
@@ -203,9 +213,15 @@ def main(marche,tous_articles,article,nombre_article,prix,seul_magasin=False):
                 prixs=prixs+article_marche_prix.get((article[n],i[n]))*nombre_article[n]
                 n+=1
             if n==len(article):
-                tousprixs[i] = prixs
+                if billet==False:
+                    tousprixs[i] = prixs
+                if billet==True:
+                    tousprixs[i] = prixs+prix_billet*(len(dict(Counter(i)))+1)
+
         min_prixs = min(zip(tousprixs.values(),tousprixs.keys())) 
         #print(tousprixs)
+        
+
     if seul_magasin==True:
         for i in marche:
             n=0
@@ -214,7 +230,10 @@ def main(marche,tous_articles,article,nombre_article,prix,seul_magasin=False):
                 prixs=prixs+article_marche_prix.get((article[n],i))*nombre_article[n]
                 n+=1
             if n==len(article):
-                tousprixs[i] = prixs
+                if billet==False:
+                    tousprixs[i] = prixs
+                if billet==True:
+                    tousprixs[i] = prixs+prix_billet*2
         min_prixs = min(zip(tousprixs.values(),tousprixs.keys()))
 
     print(min_prixs)
@@ -224,7 +243,7 @@ def main(marche,tous_articles,article,nombre_article,prix,seul_magasin=False):
 
 if __name__ == '__main__':
     #main()
-    main(marche,tous_articles,article,nombre_article,prix,seul_magasin)
+    main(marche,tous_articles,article,nombre_article,prix,seul_magasin,billet,prix_billet)
 
 
 
