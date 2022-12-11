@@ -11,14 +11,14 @@ prix=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]'''
 
 
 
-def main(marche,article,prix):
-    article_marche=[]
+def main(marche,tous_articles,article,prix):
+    tous_article_marche=[]
     for i in range(len(article)):
         for n in range(len(marche)):
-            a=article[i],marche[n]
-            article_marche.append(a)
+            a=tous_articles[i],marche[n]
+            tous_article_marche.append(a)
     #print(article_marche)
-    article_marche_prix={article_marche:prix for article_marche,prix in zip(article_marche,prix)}
+    article_marche_prix={article_marche:prix for article_marche,prix in zip(tous_article_marche,prix)}
     #print(article_marche_prix)
 
     posibles=[]
@@ -201,7 +201,7 @@ def main(marche,article,prix):
 
 if __name__ == '__main__':
     #main()
-    main(marche,article,prix)
+    main(marche,tous_articles,article,prix)
 
 
 
