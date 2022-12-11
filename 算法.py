@@ -13,16 +13,23 @@ L'ordre des noms est cohérent avec le ordre des marchandises dans l'article,
 par exemple dans Dans les résultats de l'exécution des données de test, (12, ('auchan', 'auchan', 'auchan'))
  12 représente le prix le plus bas de 12 euros,le premier auchan signifie pomme acheté à auchan, 
  et le deuxième auchan signifie lait Acheter à auchan,
- le troisième représente sel acheter à auchan'''
+ le troisième représente sel acheter à auchan
+ 
+ Ajoutez deux paramètres: seul_magasin signifie s'il faut choisir de faire ses achats dans un seul magasin, true signifie oui,
+ false signifie que vous pouvez faire vos achats dans plusieurs magasins et la valeur par défaut du paramètre est false.
+nombre_article est une liste, l'élément de la liste est int, qui est le nombre d'articles,
+ dans l'ordre des articles dans la liste article.
+ '''
 
 marche=['auchan','lidl','franprix']
 tous_articles=['pomme','lait','sel','riz','tomate']
 article=['pomme','lait','sel']
+nombre_article=[1,2,3]
 prix=[1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0,11.0,12.0,13.0,14.0,15.0]
-seul_magasin=True
+seul_magasin=False
 
 
-def main(marche,tous_articles,article,prix,seul_magasin=False):
+def main(marche,tous_articles,article,nombre_article,prix,seul_magasin=False):
     tous_article_marche=[]
     for i in range(len(article)):
         for n in range(len(marche)):
@@ -31,6 +38,10 @@ def main(marche,tous_articles,article,prix,seul_magasin=False):
     #print(article_marche)
     article_marche_prix={article_marche:prix for article_marche,prix in zip(tous_article_marche,prix)}
     #print(article_marche_prix)
+
+
+
+
 
     posibles=[]
     if len(article)==1:
@@ -189,7 +200,7 @@ def main(marche,tous_articles,article,prix,seul_magasin=False):
             n=0
             prixs=0
             while n<len(article) :
-                prixs=prixs+article_marche_prix.get((article[n],i[n]))
+                prixs=prixs+article_marche_prix.get((article[n],i[n]))*nombre_article[n]
                 n+=1
             if n==len(article):
                 tousprixs[i] = prixs
@@ -200,36 +211,20 @@ def main(marche,tous_articles,article,prix,seul_magasin=False):
             n=0
             prixs=0
             while n<len(article) :
-                prixs=prixs+article_marche_prix.get((article[n],i))
+                prixs=prixs+article_marche_prix.get((article[n],i))*nombre_article[n]
                 n+=1
             if n==len(article):
                 tousprixs[i] = prixs
         min_prixs = min(zip(tousprixs.values(),tousprixs.keys()))
 
-
-
-
-    
-        
-    
     print(min_prixs)
     return min_prixs
 
 
 
-
-
-
-
-
-
-
-
-
-
 if __name__ == '__main__':
     #main()
-    main(marche,tous_articles,article,prix,seul_magasin)
+    main(marche,tous_articles,article,nombre_article,prix,seul_magasin)
 
 
 
