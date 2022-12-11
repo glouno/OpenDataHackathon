@@ -15,17 +15,14 @@ par exemple dans Dans les résultats de l'exécution des données de test, (12, 
  et le deuxième auchan signifie lait Acheter à auchan,
  le troisième représente sel acheter à auchan'''
 
-'''marche=['auchan','lidl','franprix']
-
+marche=['auchan','lidl','franprix']
 tous_articles=['pomme','lait','sel','riz','tomate']
-
 article=['pomme','lait','sel']
+prix=[1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0,11.0,12.0,13.0,14.0,15.0]
+seul_magasin=True
 
-prix=[1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0,11.0,12.0,13.0,14.0,15.0]'''
 
-
-
-def main(marche,tous_articles,article,prix):
+def main(marche,tous_articles,article,prix,seul_magasin=False):
     tous_article_marche=[]
     for i in range(len(article)):
         for n in range(len(marche)):
@@ -186,19 +183,35 @@ def main(marche,tous_articles,article,prix):
                                                 posibles.append(a)
 
 
-                        
-                        
-    tousprixs={}
-    for i in posibles:
-        n=0
-        prixs=0
-        while n<len(article) :
-            prixs=prixs+article_marche_prix.get((article[n],i[n]))
-            n+=1
-        if n==len(article):
-            tousprixs[i] = prixs
-    #print(tousprixs)
-    min_prixs = min(zip(tousprixs.values(),tousprixs.keys()))
+    tousprixs={}                    
+    if seul_magasin==False:                    
+        for i in posibles:
+            n=0
+            prixs=0
+            while n<len(article) :
+                prixs=prixs+article_marche_prix.get((article[n],i[n]))
+                n+=1
+            if n==len(article):
+                tousprixs[i] = prixs
+        min_prixs = min(zip(tousprixs.values(),tousprixs.keys())) 
+        #print(tousprixs)
+    if seul_magasin==True:
+        for i in marche:
+            n=0
+            prixs=0
+            while n<len(article) :
+                prixs=prixs+article_marche_prix.get((article[n],i))
+                n+=1
+            if n==len(article):
+                tousprixs[i] = prixs
+        min_prixs = min(zip(tousprixs.values(),tousprixs.keys()))
+
+
+
+
+    
+        
+    
     print(min_prixs)
     return min_prixs
 
@@ -215,8 +228,8 @@ def main(marche,tous_articles,article,prix):
 
 
 if __name__ == '__main__':
-    main()
-    #main(marche,tous_articles,article,prix)
+    #main()
+    main(marche,tous_articles,article,prix,seul_magasin)
 
 
 
