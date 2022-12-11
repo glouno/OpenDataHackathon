@@ -5,7 +5,12 @@ prix est une liste, l'élément qu'elle contient est flot, qui est le prix de to
  L'ordre des éléments doit être strictement conforme à l'ordre de marche et tous_articles.
 L'ordre spécifique est le prix de la première marchandise dans le premier supermarché en marche, 
 et le prix du premier supermarché dans le premier supermarché, le prix de la deuxième marchandise, 
-et ainsi de suite, puis le prix de la première marchandise dans le deuxième supermarché, et ainsi de suite.'''
+et ainsi de suite, puis le prix de la première marchandise dans le deuxième supermarché, et ainsi de suite.
+La sortie du programme est un tuple, où le premier élément est le prix le plus bas, 
+et le deuxième élément est un tuple où l'élément est une chaîne, qui est le nom du supermarché.
+L'ordre des noms est cohérent avec le ordre des marchandises dans l'article,
+par exemple dans Dans les résultats de l'exécution des données de test, (12, ('auchan', 'auchan', 'auchan'))
+ 12 représente le prix le plus bas de 12 euros,'''
 
 '''marche=['auchan','lidl','franprix']
 
