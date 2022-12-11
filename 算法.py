@@ -1,5 +1,11 @@
-
-
+'''Marche est une liste dont les éléments sont des chaînes, qui sont les noms des supermarchés. 
+tous_articles est une liste, les éléments à l'intérieur sont des chaînes, qui sont les noms de tous les produits.
+article est une liste, les éléments qu'elle contient sont des chaînes, qui sont les noms des produits à acheter.
+prix est une liste, l'élément qu'elle contient est flot, qui est le prix de toutes les marchandises.
+ L'ordre des éléments doit être strictement conforme à l'ordre de marche et tous_articles.
+L'ordre spécifique est le prix de la première marchandise dans le premier supermarché en marche, 
+et le prix du premier supermarché dans le premier supermarché, le prix de la deuxième marchandise, 
+et ainsi de suite, puis le prix de la première marchandise dans le deuxième supermarché, et ainsi de suite.'''
 
 '''marche=['auchan','lidl','franprix']
 
@@ -7,7 +13,7 @@ tous_articles=['pomme','lait','sel','riz','tomate']
 
 article=['pomme','lait','sel']
 
-prix=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]'''
+prix=[1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0,11.0,12.0,13.0,14.0,15.0]'''
 
 
 
@@ -186,6 +192,7 @@ def main(marche,tous_articles,article,prix):
     #print(tousprixs)
     min_prixs = min(zip(tousprixs.values(),tousprixs.keys()))
     print(min_prixs)
+    return min_prixs
 
 
 
@@ -200,8 +207,8 @@ def main(marche,tous_articles,article,prix):
 
 
 if __name__ == '__main__':
-    #main()
-    main(marche,tous_articles,article,prix)
+    main()
+    #main(marche,tous_articles,article,prix)
 
 
 
