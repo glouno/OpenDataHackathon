@@ -1,6 +1,7 @@
 '''Marche est une liste dont les éléments sont des chaînes, qui sont les noms des supermarchés. 
 tous_articles est une liste, les éléments à l'intérieur sont des chaînes, qui sont les noms de tous les produits.
 article est une liste, les éléments qu'elle contient sont des chaînes, qui sont les noms des produits à acheter.
+Notez que la liste d'articles ne peut pas contenir plus de 10 éléments
 prix est une liste, l'élément qu'elle contient est flot, qui est le prix de toutes les marchandises.
  L'ordre des éléments doit être strictement conforme à l'ordre de marche et tous_articles.
 L'ordre spécifique est le prix de la première marchandise dans le premier supermarché en marche, 
@@ -10,7 +11,9 @@ La sortie du programme est un tuple, où le premier élément est le prix le plu
 et le deuxième élément est un tuple où l'élément est une chaîne, qui est le nom du supermarché.
 L'ordre des noms est cohérent avec le ordre des marchandises dans l'article,
 par exemple dans Dans les résultats de l'exécution des données de test, (12, ('auchan', 'auchan', 'auchan'))
- 12 représente le prix le plus bas de 12 euros,'''
+ 12 représente le prix le plus bas de 12 euros,le premier auchan signifie pomme acheté à auchan, 
+ et le deuxième auchan signifie lait Acheter à auchan,
+ le troisième représente sel acheter à auchan'''
 
 '''marche=['auchan','lidl','franprix']
 
