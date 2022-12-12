@@ -29,26 +29,45 @@ nombre_article est une liste, l'élément de la liste est int, qui est le nombre
  site est une liste, et les éléments de la liste sont des tuples. Le contenu des tuples sont les coordonnées x et y du magasin. 
  L'ordre d'arrangement des coordonnées du magasin doit être strictement conforme à l'ordre de la liste marche.
  mysite est une liste, les éléments de la liste sont mes coordonnées x et mes coordonnées y, la valeur par défaut est [0,0]
+
+Ajoutez deux paramètres optimale et tendance_optimisation, optimale représente s'il faut choisir la solution optimale,
+ false est non, true est oui, la valeur par défaut est false. 
+ tendance_optimisation représente la tendance d'optimisation, la valeur est 0, 1, 2. 0 représente le prix préféré , 
+ 1 représente Aucune préférence, 2 signifie une préférence pour moins de transferts.
+
  '''
+'''Le concepteur importe les valeurs dans la fonction pour obtenir le résultat. 
+Parmi eux, marche, tous_articles,article, nombre_article, prix, site, mysite, et prix_billet 
+ n'ont pas de valeurs par défaut et nécessitent de saisir manuellement des données spécifiques,
+ qui sont des données tabulaires collectées au préalable. Après avoir saisi ces données, saisissez les données du client.
+ Les données suivantes sont des données de test, si vous avez besoin de les utiliser ,supprimez ''' ''',
+et supprimez ''' ''' dans la dernière ligne et ajoutez un # avant main()'''
+
 
 from collections import Counter
 import random
 
-marche=['auchan','lidl','franprix','carrefour','casino']
+'''marche=['auchan','lidl','franprix','carrefour','casino']
 tous_articles=['pomme','lait','sel','riz','tomate']
 article=['pomme','lait','sel']
 nombre_article=[1,2,3]
 prix=[1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0,11.0,12.0,13.0,14.0,15.0,1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0]
-random.shuffle(prix)
-random.shuffle(nombre_article)
+moins_cher=False
 seul_magasin=False
 billet=True
 prix_billet=1.9
 site=[(1,4),(6,0),(7,3),(5,7),(3,6)]
-plus_cours=True
+plus_cours=False
 mysite=[5,8]
+optimale=True
+tendance_optimisation=0'''
+'''random.shuffle(prix)
+random.shuffle(nombre_article)'''
 
-def main(marche,tous_articles,article,nombre_article,prix,site,mysite=[0,0],seul_magasin=False,billet=True,prix_billet=1.9,plus_cours=False):
+def main(marche, tous_articles, article, nombre_article, prix,
+        site, mysite=[0,0], seul_magasin=False, billet=True,
+        prix_billet=1.9, plus_cours=False, moins_cher=False, optimale=False,tendance_optimisation=0):
+
     tous_article_marche=[]
     for i in range(len(article)):
         for n in range(len(marche)):
@@ -211,10 +230,46 @@ def main(marche,tous_articles,article,nombre_article,prix,site,mysite=[0,0],seul
                                                 a.append(marche[n10])
                                                 a=tuple(a)
                                                 posibles.append(a)
+    #print(posibles)
 
 
-    tousprixs={}                    
-    if seul_magasin==False and plus_cours==False:                   
+        
+
+
+    tousprixs={} 
+    if moins_cher==True :                  
+        if seul_magasin==False:                   
+            for i in posibles:
+                n=0
+                prixs=0
+                while n<len(article) :
+                    prixs=prixs+article_marche_prix.get((article[n],i[n]))*nombre_article[n]
+                    n+=1
+                if n==len(article):
+                    if billet==False:
+                        tousprixs[i] = prixs
+                    if billet==True:
+                        tousprixs[i] = prixs+prix_billet*(len(dict(Counter(i)))+1)
+
+            solution = min(zip(tousprixs.values(),tousprixs.keys())) 
+            #print(tousprixs)
+
+        if seul_magasin==True:
+            for i in marche:
+                n=0
+                prixs=0
+                while n<len(article) :
+                    prixs=prixs+article_marche_prix.get((article[n],i))*nombre_article[n]
+                    n+=1
+                if n==len(article):
+                    if billet==False:
+                        tousprixs[i] = prixs
+                    if billet==True:
+                        tousprixs[i] = prixs+prix_billet*2
+            solution = min(zip(tousprixs.values(),tousprixs.keys()))
+    
+    Poids={}
+    if optimale==True:
         for i in posibles:
             n=0
             prixs=0
@@ -223,27 +278,28 @@ def main(marche,tous_articles,article,nombre_article,prix,site,mysite=[0,0],seul
                 n+=1
             if n==len(article):
                 if billet==False:
-                    tousprixs[i] = prixs
+                    tousprixs[i] = prixs   
                 if billet==True:
                     tousprixs[i] = prixs+prix_billet*(len(dict(Counter(i)))+1)
+            if  tendance_optimisation==0:    
+                a=0.9 
+            if  tendance_optimisation==1:     
+                a=0.7
+            if  tendance_optimisation==2:
+                a=0.5
+            Poids[i]= tousprixs[i]/max(tousprixs.values()) *a+len(dict(Counter(i)))/len(marche)*(1-a)
+            
+        solution = tousprixs[list(min(zip(Poids.values(),Poids.keys())))[1]],list(min(zip(Poids.values(),Poids.keys())))[1]
 
-        min_prixs = min(zip(tousprixs.values(),tousprixs.keys())) 
-        #print(tousprixs)
+        
+            
+
         
 
-    if seul_magasin==True and plus_cours==False:
-        for i in marche:
-            n=0
-            prixs=0
-            while n<len(article) :
-                prixs=prixs+article_marche_prix.get((article[n],i))*nombre_article[n]
-                n+=1
-            if n==len(article):
-                if billet==False:
-                    tousprixs[i] = prixs
-                if billet==True:
-                    tousprixs[i] = prixs+prix_billet*2
-        min_prixs = min(zip(tousprixs.values(),tousprixs.keys()))
+
+
+
+
 
 
     if plus_cours==True:
@@ -251,7 +307,7 @@ def main(marche,tous_articles,article,nombre_article,prix,site,mysite=[0,0],seul
         for i in site:
             value_site=((list(i)[0]-mysite[0])**2) + ((list(i)[1]-mysite[1])**2)
             value_sites.append(value_site)
-        print(value_sites)
+        #print(value_sites)
         value_site_marche={value_sites:marche for value_sites,marche in zip(value_sites,marche)}
         min_value_site=min(value_site_marche)
         n=0
@@ -260,7 +316,7 @@ def main(marche,tous_articles,article,nombre_article,prix,site,mysite=[0,0],seul
             prixs=prixs+article_marche_prix.get((article[n],value_site_marche[min_value_site]))*nombre_article[n]
             n+=1
         if n==len(article):
-            min_prixs=prixs+prix_billet*2,value_site_marche[min_value_site]
+            solution=prixs+prix_billet*2,value_site_marche[min_value_site]
 
 
         
@@ -273,14 +329,16 @@ def main(marche,tous_articles,article,nombre_article,prix,site,mysite=[0,0],seul
 
 
 
-    print(min_prixs)
-    return min_prixs
+    print(solution)
+    return solution
 
 
 
 if __name__ == '__main__':
-    #main()
-    main(marche,tous_articles,article,nombre_article,prix,site,mysite,seul_magasin,billet,prix_billet,plus_cours)
+    main()
+    '''main(marche, tous_articles, article, nombre_article, prix,
+        site, mysite, seul_magasin, billet,
+        prix_billet, plus_cours, moins_cher, optimale,tendance_optimisation)'''
 
 
 
