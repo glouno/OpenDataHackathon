@@ -1,4 +1,6 @@
 import csv
+import pandas as pd
+import numpy
 
 print("Hello world")
 
@@ -22,7 +24,7 @@ listeProduits = ["tomate", "poulet", "fromage"]
 prixProduits = [6, 8, 5]
 
 MarcheB = [distancesB, listeProduits, prixProduits]
-
+'''
 print("Marché A:", MarcheA)
 
 with open('testDataStruct.csv', 'w', newline='') as fichierCSV:
@@ -35,3 +37,35 @@ with open('testDataStruct.csv', 'w', newline='') as fichierCSV:
 with open('testDataStruct.csv', 'r') as fichierCSVIN:
     for ligne in fichierCSVIN:
         print("fichier CSV:", ligne)
+
+
+
+with open('prixProduits.csv', 'r') as fichierIN:
+    for ligne in fichierIN:
+        print("fichier CSV Prix Produits:", ligne)
+
+'''
+
+data = pd.read_excel(r'prix des produits.xlsx')
+print(data)
+
+columnData = pd.read_excel(r'prix des produits.xlsx', index_col=0)
+print(columnData)
+
+columnData = pd.read_excel(r'prix des produits.xlsx',
+                            dtype= {"produit ": str,
+                            "Prix": float})
+print("Testing Head:")
+print(columnData)
+
+df = pd.DataFrame(data, columns=['produit ', 'prix'])
+print("Printing Data Frame:")
+print(df)
+print("Printing df['produit'] column:")
+print(df.index)
+
+print("Printing df.loc location:")
+print(df.loc(0))
+#?????
+
+#df[df["produit "]] == 'œufs'.head
