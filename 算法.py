@@ -69,19 +69,24 @@ def main(marche, tous_articles, article, nombre_article, prix,
         prix_billet=1.9, plus_cours=False, moins_cher=False, optimale=False,tendance_optimisation=0):
 
     tous_article_marche=[]
+    #Il s'agit d'une liste dont les éléments sont des tuples de supermarchés et de noms de produits
     for i in range(len(article)):
         for n in range(len(marche)):
             a=tous_articles[i],marche[n]
             tous_article_marche.append(a)
-    #print(article_marche)
+    #print(tous_article_marche)
     article_marche_prix={article_marche:prix for article_marche,prix in zip(tous_article_marche,prix)}
+    #Il s'agit d'un dictionnaire où la clé est un tuple de supermarché et d'article et la valeur est le prix.
     #print(article_marche_prix)
 
     marche_site={marche:site for marche,site in zip(marche,site)}
+    #Ceci est un dictionnaire où les clés sont des supermarchés et les valeurs sont des tuples de coordonnées de supermarché
 
 
 
     posibles=[]
+    '''Ceci est une liste, les éléments de la liste sont des tuples, et les tuples sont composés de noms de supermarchés,
+     et la position du supermarché dans le tuple représente que le produit représenté par la position est acheté dans le supermarché'''
     if len(article)==1:
         for n1 in range(len(marche)):
             a=[marche[n1]]
@@ -237,8 +242,12 @@ def main(marche, tous_articles, article, nombre_article, prix,
 
 
     tousprixs={} 
-    if moins_cher==True :                  
-        if seul_magasin==False:                   
+    '''Ceci est un dictionnaire, la clé est constituée de la possibilité du supermarché, 
+    et la valeur est le coût total des achats sous cette possibilité'''
+    if moins_cher==True :   
+    #Le code suivant indique que l'utilisateur a sélectionné le plan le plus favorable               
+        if seul_magasin==False:
+        #Le code suivant indique que l'utilisateur n'a pas choisi d'acheter dans un seul magasin                   
             for i in posibles:
                 n=0
                 prixs=0
@@ -246,6 +255,7 @@ def main(marche, tous_articles, article, nombre_article, prix,
                     prixs=prixs+article_marche_prix.get((article[n],i[n]))*nombre_article[n]
                     n+=1
                 if n==len(article):
+                #Le code suivant indique si l'utilisateur choisit de prendre en compte le prix du billet
                     if billet==False:
                         tousprixs[i] = prixs
                     if billet==True:
@@ -269,7 +279,11 @@ def main(marche, tous_articles, article, nombre_article, prix,
             solution = min(zip(tousprixs.values(),tousprixs.keys()))
     
     Poids={}
+    '''Dans le plan optimal complet, la pondération est utilisée pour mesurer la qualité d'un plan. 
+    Il s'agit d'un dictionnaire. La clé du dictionnaire est le plan d'achat et la valeur est la valeur de pondération du plan.
+     Plus la valeur de pondération est petite, meilleur est le plan.'''
     if optimale==True:
+    #Cette ligne de code représente le choix de l'utilisateur de la solution optimale
         for i in posibles:
             n=0
             prixs=0
@@ -281,6 +295,7 @@ def main(marche, tous_articles, article, nombre_article, prix,
                     tousprixs[i] = prixs   
                 if billet==True:
                     tousprixs[i] = prixs+prix_billet*(len(dict(Counter(i)))+1)
+            #Le code suivant représente la préférence d'optimisation sélectionnée par l'utilisateur
             if  tendance_optimisation==0:    
                 a=0.9 
             if  tendance_optimisation==1:     
@@ -291,18 +306,9 @@ def main(marche, tous_articles, article, nombre_article, prix,
             
         solution = tousprixs[list(min(zip(Poids.values(),Poids.keys())))[1]],list(min(zip(Poids.values(),Poids.keys())))[1]
 
-        
-            
-
-        
-
-
-
-
-
-
 
     if plus_cours==True:
+    #Cette ligne indique que l'utilisateur a sélectionné le plan avec la distance la plus proche
         value_sites=[]
         for i in site:
             value_site=((list(i)[0]-mysite[0])**2) + ((list(i)[1]-mysite[1])**2)
