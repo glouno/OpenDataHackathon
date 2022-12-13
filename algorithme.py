@@ -46,36 +46,38 @@ et supprimez ''' ''' dans la dernière ligne et ajoutez un # avant main()'''
 
 from collections import Counter
 import random
+#from base_donnéespy import *
 
 '''marche=['auchan','lidl','franprix','carrefour','casino']
 tous_articles=['pomme','lait','sel','riz','tomate']
 article=['pomme','lait','sel']
 nombre_article=[1,2,3]
 prix=[1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0,11.0,12.0,13.0,14.0,15.0,1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0]
-moins_cher=False
-seul_magasin=False
+moins_cher=True
+seul_magasin=True
 billet=True
 prix_billet=1.9
 site=[(1,4),(6,0),(7,3),(5,7),(3,6)]
 plus_cours=False
 mysite=[5,8]
-optimale=True
+optimale=False
 tendance_optimisation=0'''
+
 '''random.shuffle(prix)
 random.shuffle(nombre_article)'''
 
 def main(marche, tous_articles, article, nombre_article, prix,
-        site, mysite=[0,0], seul_magasin=False, billet=True,
+        site, mysite, seul_magasin=False, billet=True,
         prix_billet=1.9, plus_cours=False, moins_cher=False, optimale=False,tendance_optimisation=0):
 
     tous_article_marche=[]
     #Il s'agit d'une liste dont les éléments sont des tuples de supermarchés et de noms de produits
-    for i in range(len(article)):
+    for i in range(len(tous_articles)):
         for n in range(len(marche)):
             a=tous_articles[i],marche[n]
             tous_article_marche.append(a)
     #print(tous_article_marche)
-    article_marche_prix={article_marche:prix for article_marche,prix in zip(tous_article_marche,prix)}
+    article_marche_prix={tous_article_marche:prix for tous_article_marche,prix in zip(tous_article_marche,prix)}
     #Il s'agit d'un dictionnaire où la clé est un tuple de supermarché et d'article et la valeur est le prix.
     #print(article_marche_prix)
 
@@ -236,7 +238,7 @@ def main(marche, tous_articles, article, nombre_article, prix,
                                                 a=tuple(a)
                                                 posibles.append(a)
     #print(posibles)
-
+    
 
         
 
@@ -260,22 +262,27 @@ def main(marche, tous_articles, article, nombre_article, prix,
                         tousprixs[i] = prixs
                     if billet==True:
                         tousprixs[i] = prixs+prix_billet*(len(dict(Counter(i)))+1)
-
-            solution = min(zip(tousprixs.values(),tousprixs.keys())) 
-            #print(tousprixs)
+            solution= min(zip(tousprixs.values(),tousprixs.keys())) 
 
         if seul_magasin==True:
-            for i in marche:
+            marches=[]
+            for i in range(len(marche)):
+                q=[]
+                for n in range(len(article)):
+                    q.append(marche[i])
+                q=tuple(q)
+                marches.append(q)
+            for i in range(len(marche)):
                 n=0
                 prixs=0
                 while n<len(article) :
-                    prixs=prixs+article_marche_prix.get((article[n],i))*nombre_article[n]
+                    prixs=prixs+article_marche_prix[(article[n],marche[i])]*nombre_article[n]
                     n+=1
                 if n==len(article):
                     if billet==False:
-                        tousprixs[i] = prixs
+                        tousprixs[marches[i]] = prixs
                     if billet==True:
-                        tousprixs[i] = prixs+prix_billet*2
+                        tousprixs[marches[i]] = prixs+prix_billet*2
             solution = min(zip(tousprixs.values(),tousprixs.keys()))
     
     Poids={}
@@ -345,10 +352,10 @@ def main(marche, tous_articles, article, nombre_article, prix,
 
 
 if __name__ == '__main__':
-    main()
-    '''main(marche, tous_articles, article, nombre_article, prix,
+    #main()
+    main(marche, tous_articles, article, nombre_article, prix,
         site, mysite, seul_magasin, billet,
-        prix_billet, plus_cours, moins_cher, optimale,tendance_optimisation)'''
+        prix_billet, plus_cours, moins_cher, optimale,tendance_optimisation)
 
 
 
