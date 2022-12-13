@@ -346,7 +346,7 @@ def main(marche, tous_articles, article, nombre_article, prix,
 
 
 
-    print(solution)
+    #print(solution)
     return solution
 
 
