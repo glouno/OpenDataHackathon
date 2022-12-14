@@ -23,10 +23,12 @@ article_unite={tous_articles:unite for tous_articles,unite in zip(tous_articles,
 
 p=True
 if p==True:
+    #print('pour choisir la premiére option taper 1; pour choisir la deuxiéme option taper 2; pour choisi la troisiéme option taper 3 ')
     Option1=str(input('''Quelle option d'optimisation souhaitez-vous choisir ?
         La première option : le meilleur prix
         La deuxième option : la distance la plus courte, pas de transfert
         La troisième option: optimale complète
+        pour choisir la premiére option taper 1; pour choisir la deuxiéme option taper 2; pour choisi la troisiéme option taper 3
         Veuillez entrer 1, 2 ou 3 : '''))
     if Option1=='1':
         moins_cher=True
@@ -91,5 +93,5 @@ result=pd.DataFrame()
 result['produit'] = article
 #print(list(solution[1]))
 result['marche'] = list(solution[1])
-print(f'ça coute {list(solution)[0]} €')
+print(f'ça coute {round(list(solution)[0],2)} €')
 print(result)

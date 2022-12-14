@@ -5,7 +5,7 @@ AUCHAN = pd.DataFrame()
 AUCHAN['produit'] = ['œufs','beurre','lait', 'yaourt','riz','thon','eau','cheddar', 'SPAGHETTI','sauce tomate','poivre noire','moutarde','mayonnaise','ketchup','nutella','café', 'thé','biscuit','cookie','madeleine','brioche','pain de mie ','shampoing','dentifrice','savon','coton-tige', 'gel douche', 'demaquillant','déodorant','lave-sol','adoucissant','desodorisant','lessive','compote','pomme','clémentine','orange','poire','pomme de terre','oignon','ail','courgette','poivron','raisin','choux de bruxelle','créme fraiche','huile tournesol','tomate cerise','emmental','liquide vaiselle','jus orange','glace caramel','Confiture bio fraises','chocolat noir']
 AUCHAN['prix'] = [4.05,2.45,6.99,4.59,2.25,2.39,3.15,1.29,1.99,2.75,4.05,3.29,2.65,2.15,5.79,3.99,2.05,1.59,2.75,2.39,3.05,1.29,5.65,5.50,4.60,3.20,9.23,1.70,4.29,5.49,4.62,5.34,8.50,2.65,4.49,2.99,2.69,2.89,1.48,1.34,16.62,2.69,2.76,4.19,1.85,2.95,3.39,1.50,2.39,1.99,3.05,5.35,1.69,4.99] 
 AUCHAN['unité']=['unite','kg','litre','unite','kg','g','litre','g','kg','unite','g','g','unite','unite','kg','unite','unite','unite','unite','unite','unite','unite','unite','unite','unite','unite','unite','unite','unite','litre','unite','unite','unite','unite','kg','kg','kg','kg','kg','kg','kg','kg','kg','kg','unite','litre','kg','kg','litre','litre','unite','kg','unite','unite']
-#print(AUCHAN)
+
 
 
 

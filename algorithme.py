@@ -48,20 +48,20 @@ from collections import Counter
 import random
 #from base_donnéespy import *
 
-'''marche=['auchan','lidl','franprix','carrefour','casino']
-tous_articles=['pomme','lait','sel','riz','tomate']
-article=['pomme','lait','sel']
+'''marche=['AUCHAN','MONOPRIX','FRANPRIX','LECLERC','CARREFOUR']
+tous_articles=['œufs','beurre','lait', 'yaourt','riz','thon','eau','cheddar', 'SPAGHETTI','sauce tomate','poivre noire','moutarde','mayonnaise','ketchup','nutella','café', 'thé','biscuit','cookie','madeleine','brioche','pain de mie ','shampoing','dentifrice','savon','coton-tige', 'gel douche', 'demaquillant','déodorant','lave-sol','adoucissant','desodorisant','lessive','compote','pomme','clémentine','orange','poire','pomme de terre','oignon','ail','courgette','poivron','raisin','choux de bruxelle','créme fraiche','huile tournesol','tomate cerise','emmental','liquide vaiselle','jus orange','glace caramel','Confiture bio fraises','chocolat noir']
+article=['beurre','lait','riz']
 nombre_article=[1,2,3]
-prix=[1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0,11.0,12.0,13.0,14.0,15.0,1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0]
-moins_cher=True
-seul_magasin=True
+prix=[4.05,2.45,6.99,4.59,2.25,2.39,3.15,1.29,1.99,2.75,4.05,3.29,2.65,2.15,5.79,3.99,2.05,1.59,2.75,2.39,3.05,1.29,5.65,5.50,4.60,3.20,9.23,1.70,4.29,5.49,4.62,5.34,8.50,2.65,4.49,2.99,2.69,2.89,1.48,1.34,16.62,2.69,2.76,4.19,1.85,2.95,3.39,1.50,2.39,1.99,3.05,5.35,1.69,4.99] 
+moins_cher=False
+seul_magasin=False
 billet=True
 prix_billet=1.9
 site=[(1,4),(6,0),(7,3),(5,7),(3,6)]
-plus_cours=False
+plus_cours=True
 mysite=[5,8]
 optimale=False
-tendance_optimisation=0'''
+tendance_optimisation=2'''
 
 '''random.shuffle(prix)
 random.shuffle(nombre_article)'''
@@ -303,14 +303,15 @@ def main(marche, tous_articles, article, nombre_article, prix,
                 if billet==True:
                     tousprixs[i] = prixs+prix_billet*(len(dict(Counter(i)))+1)
             #Le code suivant représente la préférence d'optimisation sélectionnée par l'utilisateur
-            if  tendance_optimisation==0:    
-                a=0.9 
-            if  tendance_optimisation==1:     
-                a=0.7
-            if  tendance_optimisation==2:
-                a=0.5
-            Poids[i]= tousprixs[i]/max(tousprixs.values()) *a+len(dict(Counter(i)))/len(marche)*(1-a)
-            
+            if  tendance_optimisation==1:    
+                a=9 
+            if  tendance_optimisation==2:     
+                a=7
+            if  tendance_optimisation==3:
+                a=5
+            #print(type(tousprixs[i]),type(max(tousprixs.values())),type(len(dict(Counter(i)))))    
+            Poids[i]= tousprixs[i]/max(tousprixs.values()) *a+len(dict(Counter(i)))/len(marche)*(10-a)
+            #print(Poids)
         solution = tousprixs[list(min(zip(Poids.values(),Poids.keys())))[1]],list(min(zip(Poids.values(),Poids.keys())))[1]
 
 
@@ -323,6 +324,11 @@ def main(marche, tous_articles, article, nombre_article, prix,
         #print(value_sites)
         value_site_marche={value_sites:marche for value_sites,marche in zip(value_sites,marche)}
         min_value_site=min(value_site_marche)
+        #print(min_value_site)
+        q=[]
+        value_site_marches=[]
+        for n in range(len(article)):
+            value_site_marches.append(value_site_marche[min_value_site])
         n=0
         prixs=0
         while n<len(article) :
@@ -330,9 +336,9 @@ def main(marche, tous_articles, article, nombre_article, prix,
             n+=1
         if n==len(article):
             if billet==False:
-                solution=prixs,value_site_marche[min_value_site]
+                solution=prixs,tuple(value_site_marches)
             if billet==True:
-                solution=prixs+prix_billet*2,value_site_marche[min_value_site]
+                solution=prixs+prix_billet*2,tuple(value_site_marches)
             
 
 
@@ -346,7 +352,7 @@ def main(marche, tous_articles, article, nombre_article, prix,
 
 
 
-    #print(solution)
+    print(solution)
     return solution
 
 
