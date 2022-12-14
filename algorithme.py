@@ -352,13 +352,12 @@ def main(marche, tous_articles, article, nombre_article, prix,
 
 
 
-    print(solution)
+    #print(solution)
     return solution
 
 
 
 if __name__ == '__main__':
-    #main()
     main(marche, tous_articles, article, nombre_article, prix,
         site, mysite, seul_magasin, billet,
         prix_billet, plus_cours, moins_cher, optimale,tendance_optimisation)
