@@ -19,6 +19,7 @@ prix_billet=1.9
 site=[(1,4),(6,0),(7,3),(5,7),(3,6)]
 mysite=[0,0]
 article_unite={tous_articles:unite for tous_articles,unite in zip(tous_articles,unite)}
+articles_unite=[]
 
 
 p=True
@@ -68,9 +69,15 @@ while continuer==True :
         continuer=False
     else:
         article.append(Option2)
+        articles_unite.append(article_unite[Option2])
         Option3=int(input(f'Quelle est sa quantité ? (Entrez simplement un nombre, unité par défaut est {article_unite[Option2]}) :'))
         nombre_article.append(Option3)
-#print(article,nombre_article)
+article_nombre_unite=pd.DataFrame()
+article_nombre_unite['article'] = article
+article_nombre_unite['nombre']= nombre_article
+article_nombre_unite['unité']  = articles_unite
+print('Votre liste de courses est:')
+print(article_nombre_unite)
 
 
 
@@ -94,4 +101,5 @@ result['produit'] = article
 #print(list(solution[1]))
 result['marche'] = list(solution[1])
 print(f'ça coute {round(list(solution)[0],2)} €')
+print('''Votre plan d'achat est :''')
 print(result)
