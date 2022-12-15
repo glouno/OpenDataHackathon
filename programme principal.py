@@ -21,42 +21,65 @@ mysite=[0,0]
 article_unite={tous_articles:unite for tous_articles,unite in zip(tous_articles,unite)}
 articles_unite=[]
 
+def seulmag():
+    a=str(input('Acheter que dans un seul magasin ? Oui ou non :'))
+    if a=='oui':
+        return 'oui'
+    elif a=='non':
+        return 'non'
+    else :
+        print('''Vous n'avez inscrit ni oui ni non. Veuillez réessayer''')
+        return seulmag()
 
-p=True
-if p==True:
+def sibillet():
+    a=str(input('Avez-vous besoin de considérer le prix du billet? Oui ou non :'))
+    if a=='oui':
+        return 'oui'
+    elif a=='non':
+        return 'non'
+    else :
+        print('''Vous n'avez inscrit ni oui ni non. Veuillez réessayer''')
+        return sibillet()
+
+
+
+
+
     #print('pour choisir la premiére option taper 1; pour choisir la deuxiéme option taper 2; pour choisi la troisiéme option taper 3 ')
-    Option1=str(input('''Quelle option d'optimisation souhaitez-vous choisir ?
-        La première option : le meilleur prix
-        La deuxième option : la distance la plus courte, pas de transfert
-        La troisième option: optimale complète
-        pour choisir la premiére option taper 1; pour choisir la deuxiéme option taper 2; pour choisi la troisiéme option taper 3
-        Veuillez entrer 1, 2 ou 3 : '''))
-    if Option1=='1':
-        moins_cher=True
-        Option1_1=str(input('Acheter que dans un seul magasin ? Oui ou non :'))
-        if Option1_1=='oui':
-            seul_magasin=True
-        Option1_2=str(input('Avez-vous besoin de considérer le prix du billet? Oui ou non :'))
-        if Option1_2=='non':
-            billet=False
+Option1=str(input('''Quelle option d'optimisation souhaitez-vous choisir ?
+    La première option : le meilleur prix
+    La deuxième option : la distance la plus courte, pas de transfert
+    La troisième option: optimale complète
+    pour choisir la premiére option taper 1; pour choisir la deuxiéme option taper 2; pour choisi la troisiéme option taper 3
+    Veuillez entrer 1, 2 ou 3 : '''))
 
-    elif Option1=='2':
-        plus_cours=True
-        Option1_1=str(input('Avez-vous besoin de considérer le prix du billet? Oui ou non :'))
-        if Option1_1=='non':
-            billet=False
+if Option1=='1':
+    moins_cher=True
+    Option1_1=seulmag()
+    if Option1_1=='oui':
+        seul_magasin=True
+    Option1_2=sibillet()
+    if Option1_2=='non':
+        billet=False
 
-    elif Option1=='3':
-        optimale=True
-        Option1_1=int(input('''Ou est-ce une optimisation qui favorise les transferts, ou une optimisation plus équilibrée ?
-    Veuillez entrer 1 pour un prix biaisé
-    Veuillez entrer 2 pour un solde partiel
-    Si vous préférez réduire le transfert, veuillez entrer 3 :'''))
-        tendance_optimisation=Option1_1
-        Option1_2=str(input('Avez-vous besoin de considérer le prix du billet? Oui ou non :'))
-        if Option1_2=='non':
-            billet=False
-    #print(moins_cher,plus_cours,optimale,seul_magasin,billet)
+elif Option1=='2':
+    plus_cours=True
+    Option1_1=sibillet()
+    if Option1_1=='non':
+        billet=False
+
+elif Option1=='3':
+    optimale=True
+    Option1_1=int(input('''Ou est-ce une optimisation qui favorise les transferts, ou une optimisation plus équilibrée ?
+Veuillez entrer 1 pour un prix biaisé
+Veuillez entrer 2 pour un solde partiel
+Si vous préférez réduire le transfert, veuillez entrer 3 :'''))
+    tendance_optimisation=Option1_1
+    Option1_2=sibillet()
+    if Option1_2=='non':
+        billet=False
+    
+#print(moins_cher,plus_cours,optimale,seul_magasin,billet)
 
 
 
