@@ -67,6 +67,9 @@ while continuer==True :
      Entrez non pour terminer :'''))
     if Option2=='non':
         continuer=False
+    elif Option2 not in tous_articles:
+        print('''Le produit que vous recherchez n'existe pas''')
+        continue
     else:
         article.append(Option2)
         articles_unite.append(article_unite[Option2])
