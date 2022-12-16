@@ -70,10 +70,12 @@ elif Option1=='2':
 
 elif Option1=='3':
     optimale=True
-    Option1_1=int(input('''Ou est-ce une optimisation qui favorise les transferts, ou une optimisation plus équilibrée ?
-Veuillez entrer 1 pour un prix biaisé
-Veuillez entrer 2 pour un solde partiel
-Si vous préférez réduire le transfert, veuillez entrer 3 :'''))
+    Option1_1=int(input('''
+    Le plan entièrement optimisé vous donnera un plan avec des prix moins chers et moins de transferts.
+    Dans le cadre de ce plan entièrement optimisé:
+    si vous accordez plus d'attention aux prix bon marché qu'aux transferts, veuillez entrer 1 ;
+    Si vous souhaitez donner un poids égal à des prix moins chers et à moins de transferts, entrez 2 ;
+    Si vous valorisez moins de transferts plus que des prix inférieurs, entrez 3 :'''))
     tendance_optimisation=Option1_1
     Option1_2=sibillet()
     if Option1_2=='non':
